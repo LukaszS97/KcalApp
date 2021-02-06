@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: head">
+</head>
+<body>
+<div th:include="layout :: navigationPanel"></div>
+<h1 style="text-align: center">Dodaj produkt:</h1>
+<form style="margin-left: auto; margin-right: auto; width: 95%; text-align: center;" th:action="@{/product}" method="POST" th:object="${product}">
+    <input type="text" th:field="*{name}" placeholder="Nazwa"/></br>
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></br>
+    <input type="number" th:field="*{kcal}" placeholder="Kcal"/></br>
+    <span th:if="${#fields.hasErrors('kcal')}" th:errors="*{kcal}"></span></br>
+    <input type="number" th:field="*{protein}" placeholder="Białko"/></br>
+    <span th:if="${#fields.hasErrors('protein')}" th:errors="*{protein}"></span></br>
+    <input type="number" th:field="*{carbohydrates}" placeholder="Węglowodany"/></br>
+    <span th:if="${#fields.hasErrors('carbohydrates')}" th:errors="*{carbohydrates}"></span></br>
+    <input type="number" th:field="*{fat}" placeholder="Tłuszcz"/></br>
+    <span th:if="${#fields.hasErrors('fat')}" th:errors="*{fat}"></span></br>
+    <button type="submit">Dodaj</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: head">
+</head>
+<body>
+<div th:include="layout :: navigationPanel"></div>
+    <h1 style="text-align: center">Logowanie do systemu:</h1>
+    <form style="margin-left: auto; margin-right: auto; width: 95%; text-align: center;" th:action="@{/login}" method="POST">
+        <input type="text" name="login" placeholder="Login"/>
+        <input type="password" name="passwd" placeholder="Hasło"/>
+        <button type="submit">Zaloguj się</button>
+    </form>
+    <div style="color: red; text-align: center" th:if="${param.error}">
+        <div class="alert alert-danger">Niepoprawny login lub hasło.
+        </div>
+    </div>
+</body>
+</html>

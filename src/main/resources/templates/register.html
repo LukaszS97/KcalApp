@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: head">
+</head>
+<body>
+<div th:include="layout :: navigationPanel"></div>
+<h1 style="text-align: center">Rejestracja:</h1>
+<form style="margin-left: auto; margin-right: auto; width: 95%; text-align: center;" th:action="@{/register}" method="POST" th:object="${user}">
+    <input type="text" th:field="*{login}" placeholder="Login od 2 do 20 znaków"/>
+    <input type="password" th:field="*{password}" placeholder="Hasło"/>
+    <button type="submit">Zarejestruj się</button></br>
+    <div style="color: red; text-align: center" th:if="${param.fail}">
+        <div class="alert alert-danger">Wybrany login jest już zajęty.</div>
+    </div>
+    <span style="color: red;" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span></br>
+    <span style="color: red;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+</form>
+</body>
+</html>

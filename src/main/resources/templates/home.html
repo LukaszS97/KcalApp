@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: head">
+</head>
+<body>
+<div th:include="layout :: navigationPanel"></div>
+<div style="text-align: center" th:if="${home.imie} != null">
+    <h1 th:text="'Cześć ' + ${home.imie}"></h1>
+        <h3>Twój dzienny limit kaloryczny:<p th:text="${home.kcalToEat}+'kcal'"></p> </h3>
+        <h3>Dzisiaj zjadłeś:<p th:text="${home.eatenKcal}+'kcal'"></p> </h3>
+    <table style="margin-left: 30%; margin-right: 30%; width: 40%; text-align: center; border-collapse: collapse">
+        <tr>
+            <td style="width: 33.3%">Białko:</td>
+            <td style="width: 33.3%">Węglowodany:</td>
+            <td style="width: 33.3%">Tłuszcz:</td>
+        </tr>
+        <tr>
+            <td th:text="${home.protein}"></td>
+            <td th:text="${home.carbohydrates}"></td>
+            <td th:text="${home.fat}"></td>
+        </tr>
+    </table>
+</div>
+<div style="text-align: center" th:if="${home.imie} == null">
+    <h3>Najpierw wprowadź swoje dane do profilu!</h3>
+</div>
+</body>
+</html>
