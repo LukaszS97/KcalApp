@@ -3,11 +3,8 @@ package com.example.app.service;
 import com.example.app.dao.ProductDao;
 import com.example.app.model.Product;
 import com.example.app.model.User;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,41 +20,38 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product save(Product product) {
         Product productToSave = new Product();
+        double percentage100grams = calculateWeightTo100G(product.getWeight());
         productToSave.setName(product.getName());
-        productToSave.setCarbohydrates(product.getCarbohydrates());
-        productToSave.setFat(product.getFat());
-        productToSave.setKcal(product.getKcal());
-        productToSave.setProtein(product.getProtein());
+        productToSave.setWeight(Math.round(product.getWeight()*percentage100grams)/100.0);
+        productToSave.setCarbohydrates(Math.round(product.getCarbohydrates()*percentage100grams)/100.0);
+        productToSave.setFat(Math.round(product.getFat()*percentage100grams)/100.0);
+        productToSave.setKcal(Math.round(product.getKcal()*percentage100grams)/100.0);
+        productToSave.setProtein(Math.round(product.getProtein()*percentage100grams)/100.0);
         productToSave.setUser(product.getUser());
-        Date date = new Date();
-        java.sql.Date date1 = new java.sql.Date(date.getTime());
-        productToSave.setDate(date1);
         return productDao.save(productToSave);
     }
 
     @Override
     public void update(Product product) {
         Optional<Product> productToupdate = productDao.findById(product.getProductid());
+        double percentage100grams = calculateWeightTo100G(product.getWeight());
         productToupdate.get().setName(product.getName());
-        productToupdate.get().setDate(product.getDate());
-        productToupdate.get().setKcal(product.getKcal());
-        productToupdate.get().setCarbohydrates(product.getCarbohydrates());
-        productToupdate.get().setProtein(product.getProtein());
-        productToupdate.get().setFat(product.getFat());
+        productToupdate.get().setWeight(Math.round(product.getWeight()*percentage100grams)/100.0);
+        productToupdate.get().setCarbohydrates(Math.round(product.getCarbohydrates()*percentage100grams)/100.0);
+        productToupdate.get().setFat(Math.round(product.getFat()*percentage100grams)/100.0);
+        productToupdate.get().setKcal(Math.round(product.getKcal()*percentage100grams)/100.0);
+        productToupdate.get().setProtein(Math.round(product.getProtein()*percentage100grams)/100.0);
         productDao.save(productToupdate.get());
     }
 
     @Override
-    public List<Product> todayEaten(User user) {
+    public List<Product> productsList(User user) {
         List<Product> list = productDao.findAllByUser(user);
-        List<Product> listToReturn = new ArrayList<Product>();
-        Date date = new Date();
-        java.sql.Date date1 = new java.sql.Date(date.getTime());
-        for(int i = 0; i<list.size(); i++) {
-            if(date1.toString().equals(list.get(i).getDate().toString())) {
-                listToReturn.add(list.get(i));
-            } 
-        }
-        return listToReturn;
+        return list;
+    }
+
+    public Double calculateWeightTo100G(double weight) {
+        double x = 10000/weight;
+        return x;
     }
 }

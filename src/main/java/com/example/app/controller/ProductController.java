@@ -47,7 +47,7 @@ public class ProductController {
     @GetMapping("/product/list")
     public String productListPage(Model model, Principal principal) {
         User user = userDao.findByLogin(principal.getName());
-        model.addAttribute("productList", productService.todayEaten(user));
+        model.addAttribute("productList", productService.productsList(user));
         return "productList";
     }
 

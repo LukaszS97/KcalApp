@@ -8,6 +8,8 @@
 <form style="margin-left: auto; margin-right: auto; width: 95%; text-align: center;" th:action="@{/product}" method="POST" th:object="${product}">
     <input type="text" th:field="*{name}" placeholder="Nazwa"/></br>
     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></br>
+    <input type="number" th:field="*{weight}" placeholder="waga"/></br>
+    <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></span></br>
     <input type="number" th:field="*{kcal}" placeholder="Kcal"/></br>
     <span th:if="${#fields.hasErrors('kcal')}" th:errors="*{kcal}"></span></br>
     <input type="number" th:field="*{protein}" placeholder="Białko"/></br>

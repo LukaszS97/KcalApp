@@ -9,5 +9,5 @@ public interface ProductService {
     Product save(Product product);
     void update(Product product);
 
-    List<Product> todayEaten(User user);
+    List<Product> productsList(User user);
 }

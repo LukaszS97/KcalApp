@@ -15,11 +15,12 @@
     Pomyślnie zaktualizowano produkt.
 </div><br/>
 <div th:if="${productList.size() >= 1}">
-<h1 style="text-align: center">Posiłki zjedzone dzisiaj:</h1>
+<h1 style="text-align: center">Produkty:</h1>
     <table style="margin-left: auto; margin-right: auto; width: 80%; text-align: center; border-collapse: collapse">
         <thead>
         <tr>
             <th>Nazwa</th>
+            <th>Waga</th>
             <th>Kcal</th>
             <th>Białko</th>
             <th>Węglowodany</th>
@@ -28,13 +29,14 @@
         </thead>
         <tbody>
         <tr th:each="w : ${productList}">
-            <td style="width: 16.66%" th:text="${w.name}"></td>
-            <td style="width: 16.66%" th:text="${w.kcal}"></td>
-            <td style="width: 16.66%" th:text="${w.protein}"></td>
-            <td style="width: 16.66%" th:text="${w.carbohydrates}"></td>
-            <td style="width: 16.66%" th:text="${w.fat}"></td>
+            <td style="width: 14.28%" th:text="${w.name}"></td>
+            <td style="width: 14.28%" th:text="${w.weight}"></td>
+            <td style="width: 14.28%" th:text="${w.kcal}"></td>
+            <td style="width: 14.28%" th:text="${w.protein}"></td>
+            <td style="width: 14.28%" th:text="${w.carbohydrates}"></td>
+            <td style="width: 14.28%" th:text="${w.fat}"></td>
 
-            <td style="width: 16.66%; border: none">
+            <td style="width: 14.28%; border: none">
                     <a th:href="@{/product/edit/{id}(id=${w.productid})}" style="background-color: #1877f2; padding: 4px;" role="button">Edytuj</a>
                     <a th:href="@{/product/delete/{id}(id=${w.productid})}" style="background-color: red; padding: 4px;" role="button">Usuń</a>
             </td>

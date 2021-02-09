@@ -19,7 +19,16 @@ public class User {
     private Profile profile;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Product> product;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<DailyMeal> dailyMeal;
 
+    public Set<DailyMeal> getDailyMeal() {
+        return dailyMeal;
+    }
+
+    public void setDailyMeal(Set<DailyMeal> dailyMeal) {
+        this.dailyMeal = dailyMeal;
+    }
 
     public Set<Product> getProduct() {
         return product;

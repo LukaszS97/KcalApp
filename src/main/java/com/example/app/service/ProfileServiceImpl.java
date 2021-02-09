@@ -55,18 +55,18 @@ public class ProfileServiceImpl implements ProfileService{
 
     @Override
     public HomeProfileDto home(User user) {
-        List<Product> list = productDao.findAllByUser(user);
+//        List<Product> list = productDao.findAllByUser(user);
         HomeProfileDto home = new HomeProfileDto();
-        Date date = new Date();
-        java.sql.Date date1 = new java.sql.Date(date.getTime());
-        for(int i = 0; i<list.size(); i++) {
-            if(date1.toString().equals(list.get(i).getDate().toString())) {
-                home.setEatenKcal(home.getEatenKcal() + list.get(i).getKcal());
-                home.setFat(home.getFat() + list.get(i).getFat());
-                home.setProtein(home.getProtein() + list.get(i).getProtein());
-                home.setCarbohydrates(home.getCarbohydrates() + list.get(i).getCarbohydrates());
-            }
-        }
+//        Date date = new Date();
+//        java.sql.Date date1 = new java.sql.Date(date.getTime());
+//        for(int i = 0; i<list.size(); i++) {
+//            if(date1.toString().equals(list.get(i).getDate().toString())) {
+//                home.setEatenKcal(home.getEatenKcal() + list.get(i).getKcal());
+//                home.setFat(home.getFat() + list.get(i).getFat());
+//                home.setProtein(home.getProtein() + list.get(i).getProtein());
+//                home.setCarbohydrates(home.getCarbohydrates() + list.get(i).getCarbohydrates());
+//            }
+//        }
         home.setImie(user.getProfile().getName());
         home.setNazwisko(user.getProfile().getSurname());
         home.setKcalToEat(user.getProfile().getKcal());
