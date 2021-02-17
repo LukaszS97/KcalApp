@@ -5,8 +5,10 @@ import com.example.app.model.Product;
 import com.example.app.model.User;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -21,7 +23,7 @@ public class ProductServiceImpl implements ProductService{
     public Product save(Product product) {
         Product productToSave = new Product();
         double percentage100grams = calculateWeightTo100G(product.getWeight());
-        productToSave.setName(product.getName());
+        productToSave.setName(product.getName().substring(0,1).toUpperCase() + product.getName().toLowerCase().substring(1));
         productToSave.setWeight(Math.round(product.getWeight()*percentage100grams)/100.0);
         productToSave.setCarbohydrates(Math.round(product.getCarbohydrates()*percentage100grams)/100.0);
         productToSave.setFat(Math.round(product.getFat()*percentage100grams)/100.0);
@@ -35,7 +37,7 @@ public class ProductServiceImpl implements ProductService{
     public void update(Product product) {
         Optional<Product> productToupdate = productDao.findById(product.getProductid());
         double percentage100grams = calculateWeightTo100G(product.getWeight());
-        productToupdate.get().setName(product.getName());
+        productToupdate.get().setName(product.getName().substring(0,1).toUpperCase() + product.getName().toLowerCase().substring(1));
         productToupdate.get().setWeight(Math.round(product.getWeight()*percentage100grams)/100.0);
         productToupdate.get().setCarbohydrates(Math.round(product.getCarbohydrates()*percentage100grams)/100.0);
         productToupdate.get().setFat(Math.round(product.getFat()*percentage100grams)/100.0);
@@ -46,8 +48,10 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> productsList(User user) {
-        List<Product> list = productDao.findAllByUser(user);
-        return list;
+        List<Product> sortedProducts = productDao.findAll().stream()
+                .sorted(Comparator.comparing(Product::getName))
+                .collect(Collectors.toList());
+        return sortedProducts;
     }
 
     public Double calculateWeightTo100G(double weight) {

@@ -1,37 +1,27 @@
 package com.example.app.dto;
 
+import com.example.app.model.DailyMeal;
+import com.example.app.model.Product;
+
+import java.util.List;
+
 public class HomeProfileDto {
 
     private double kcalToEat;
     private double eatenKcal;
     private String imie;
     private String nazwisko;
-    private int fat;
-    private int protein;
-    private int carbohydrates;
+    private double fat;
+    private double protein;
+    private double carbohydrates;
+    private List<DailyMeal> dailyMeals;
 
-    public int getFat() {
-        return fat;
+    public List<DailyMeal> getDailyMeals() {
+        return dailyMeals;
     }
 
-    public void setFat(int fat) {
-        this.fat = fat;
-    }
-
-    public int getProtein() {
-        return protein;
-    }
-
-    public void setProtein(int protein) {
-        this.protein = protein;
-    }
-
-    public int getCarbohydrates() {
-        return carbohydrates;
-    }
-
-    public void setCarbohydrates(int carbohydrates) {
-        this.carbohydrates = carbohydrates;
+    public void setDailyMeals(List<DailyMeal> dailyMeals) {
+        this.dailyMeals = dailyMeals;
     }
 
     public double getKcalToEat() {
@@ -64,5 +54,29 @@ public class HomeProfileDto {
 
     public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
+    }
+
+    public double getFat() {
+        return fat;
+    }
+
+    public void setFat(double fat) {
+        this.fat = fat;
+    }
+
+    public double getProtein() {
+        return protein;
+    }
+
+    public void setProtein(double protein) {
+        this.protein = protein;
+    }
+
+    public double getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public void setCarbohydrates(double carbohydrates) {
+        this.carbohydrates = carbohydrates;
     }
 }

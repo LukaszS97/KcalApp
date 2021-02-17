@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: head">
+</head>
+<body>
+<div th:include="layout :: navigationPanel"></div>
+<h1 style="text-align: center">Edytuj posiłek:</h1>
+<div style="color: red; text-align: center" th:if="${param.fail}">
+    Błąd walidacji. Spróbuj ponownie.
+</div><br/>
+<form style="margin-left: auto; margin-right: auto; width: 95%; text-align: center;" th:action="@{/meal/edit}" method="POST" th:object="${dailyMeal}">
+    <input type="hidden" th:field="*{product}"/></br>
+    <input type="hidden" th:field="*{dailyMealId}"/></br>
+    <input type="number" th:field="*{weight}" placeholder="Waga"/></br>
+    <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></span></br>
+    <button type="submit">Dodaj</button>
+</form>
+</body>
+</html>

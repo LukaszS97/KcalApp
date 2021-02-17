@@ -73,7 +73,7 @@ public class ProductController {
     }
 
     @PostMapping("/product/edit")
-    String editWallet(@Valid @ModelAttribute(value = "product") Product product, BindingResult bindingResult, Principal principal) {
+    String editProduct(@Valid @ModelAttribute(value = "product") Product product, BindingResult bindingResult, Principal principal) {
         if(bindingResult.hasErrors()){
             return "redirect:/product/edit/"+product.getProductid()+"?fail";
         }

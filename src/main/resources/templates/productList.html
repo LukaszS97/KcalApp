@@ -8,6 +8,9 @@
 <div style="color: green; text-align: center" th:if="${param.deleted}">
     Pomyślnie usunięto produkt.
 </div><br/>
+<div style="color: green; text-align: center" th:if="${param.added}">
+    Pomyślnie dodano posiłek.
+</div><br/>
 <div style="color: red; text-align: center" th:if="${param.notFound}">
     Produkt o podanym id nie istnieje.
 </div><br/>
@@ -37,6 +40,7 @@
             <td style="width: 14.28%" th:text="${w.fat}"></td>
 
             <td style="width: 14.28%; border: none">
+                    <a th:href="@{/meal/add/{id}(id=${w.productid})}" style="background-color: green; padding: 4px;" role="button">Dodaj</a>
                     <a th:href="@{/product/edit/{id}(id=${w.productid})}" style="background-color: #1877f2; padding: 4px;" role="button">Edytuj</a>
                     <a th:href="@{/product/delete/{id}(id=${w.productid})}" style="background-color: red; padding: 4px;" role="button">Usuń</a>
             </td>

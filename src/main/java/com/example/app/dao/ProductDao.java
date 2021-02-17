@@ -11,4 +11,6 @@ public interface ProductDao extends CrudRepository<Product, Long> {
     List<Product> findAllByUser(User user);
 
     List<Product> findAllByProductid(Long id);
+
+    List<Product> findAll();
 }

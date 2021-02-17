@@ -10,19 +10,55 @@
         <h3>Dzisiaj zjadłeś:<p th:text="${home.eatenKcal}+'kcal'"></p> </h3>
     <table style="margin-left: 30%; margin-right: 30%; width: 40%; text-align: center; border-collapse: collapse">
         <tr>
-            <td style="width: 33.3%">Białko:</td>
-            <td style="width: 33.3%">Węglowodany:</td>
-            <td style="width: 33.3%">Tłuszcz:</td>
+            <td style="width: 33.3%; border: none">Białko:</td>
+            <td style="width: 33.3%; border: none">Węglowodany:</td>
+            <td style="width: 33.3%; border: none">Tłuszcz:</td>
         </tr>
         <tr>
-            <td th:text="${home.protein}"></td>
-            <td th:text="${home.carbohydrates}"></td>
-            <td th:text="${home.fat}"></td>
+            <td style="border: none" th:text="${home.protein}"></td>
+            <td style="border: none" th:text="${home.carbohydrates}"></td>
+            <td style="border: none" th:text="${home.fat}"></td>
+        </tr>
+    </table></br></br>
+    <div style="color: green; text-align: center" th:if="${param.deleted}">
+        Pomyślnie usunięto produkt.
+    </div>
+    <div style="color: green; text-align: center" th:if="${param.edited}">
+        Pomyślnie edytowano posiłek.
+    </div>
+    <div style="color: red; text-align: center" th:if="${param.notFound}">
+        Nie znaleziono posiłku o podanym id.
+    </div><br/>
+    <div th:if="${home.dailyMeals.size()} > 0">
+    <h3>Dzisiaj zjedzono:</h3></br>
+
+    <table style="margin-left: auto; margin-right: auto; width: 80%; text-align: center; border-collapse: collapse">
+        <tr>
+            <td>Nazwa:</td>
+            <td>Waga:</td>
+            <td>Kcal:</td>
+            <td>Białko:</td>
+            <td>Węglowodany:</td>
+            <td>Tłuszcz:</td>
+        </tr>
+        <tr th:each="w : ${home.dailyMeals}">
+            <td style="width: 14.28%" th:text="${w.product.name}"></td>
+            <td style="width: 14.28%" th:text="${w.weight*100} + 'g'"></td>
+            <td style="width: 14.28%" th:text="${w.product.kcal*w.weight} + 'kcal'"></td>
+            <td style="width: 14.28%" th:text="${w.product.protein*w.weight} + 'b'"></td>
+            <td style="width: 14.28%" th:text="${w.product.carbohydrates*w.weight} + 'w'"></td>
+            <td style="width: 14.28%" th:text="${w.product.fat*w.weight} + 't'"></td>
+            <td style="width: 14.28%; border: none">
+                <a th:href="@{/meal/edit/{id}(id=${w.dailyMealId})}" style="background-color: #1877f2; padding: 4px;" role="button">Edytuj</a>
+                <a th:href="@{/meal/delete/{id}(id=${w.dailyMealId})}" style="background-color: red; padding: 4px;" role="button">Usuń</a>
+            </td>
         </tr>
     </table>
+    </div>
 </div>
 <div style="text-align: center" th:if="${home.imie} == null">
     <h3>Najpierw wprowadź swoje dane do profilu!</h3>
 </div>
 </body>
 </html>
+
