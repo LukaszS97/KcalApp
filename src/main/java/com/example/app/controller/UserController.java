@@ -39,8 +39,11 @@ public class UserController {
         if(binding.hasErrors()) {
             return "register";
         } else if(userDao.findByLogin(user.getLogin()) == null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userDao.save(user);
+            User userToSave = new User.Builder()
+                    .login(user.getLogin())
+                    .password(passwordEncoder.encode(user.getPassword()))
+                    .build();
+            userDao.save(userToSave);
             return "redirect:/login";
         } else {
             return "redirect:/register?fail";

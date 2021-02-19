@@ -36,6 +36,72 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<DailyMeal> dailyMeal;
 
+    public static final class Builder {
+        private Long productid;
+        private String name;
+        private double weight;
+        private double kcal;
+        private double protein;
+        private double fat;
+        private double carbohydrates;
+        private User user;
+        private Set<DailyMeal> dailyMeal;
+
+        public Builder productid(Long productid) {
+            this.productid=productid;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name=name;
+            return this;
+        }
+
+        public Builder weight(double weight) {
+            this.weight=weight;
+            return this;
+        }
+        public Builder kcal(double kcal) {
+            this.kcal=kcal;
+            return this;
+        }
+        public Builder protein(double protein) {
+            this.protein=protein;
+            return this;
+        }
+        public Builder fat(double fat) {
+            this.fat=fat;
+            return this;
+        }
+        public Builder carbohydrates(double carbohydrates) {
+            this.carbohydrates=carbohydrates;
+            return this;
+        }
+        public Builder user(User user) {
+            this.user=user;
+            return this;
+        }
+        public Builder dailyMeal(Set<DailyMeal> dailyMeal) {
+            this.dailyMeal=dailyMeal;
+            return this;
+        }
+
+        public Product build() {
+            Product product = new Product();
+            product.productid=productid;
+            product.name=name;
+            product.weight=weight;
+            product.kcal=kcal;
+            product.protein=protein;
+            product.fat=fat;
+            product.carbohydrates=carbohydrates;
+            product.user=user;
+            product.dailyMeal=dailyMeal;
+            return product;
+        }
+    }
+
+
     public Set<DailyMeal> getDailyMeal() {
         return dailyMeal;
     }

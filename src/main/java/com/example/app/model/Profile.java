@@ -5,6 +5,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 
 @Entity
@@ -33,6 +34,72 @@ public class Profile {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    public static final class Builder {
+        private Long id;
+        private String name;
+        private String surname;
+        private int weight;
+        private int height;
+        private int age;
+        private double kcal;
+        private User user;
+
+        public Builder id(Long id) {
+            this.id=id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name=name;
+            return this;
+        }
+
+        public Builder surname(String surname) {
+            this.surname=surname;
+            return this;
+        }
+
+        public Builder weight(int weight) {
+            this.weight=weight;
+            return this;
+        }
+
+        public Builder height(int height) {
+            this.height=height;
+            return this;
+        }
+
+        public Builder age(int age) {
+            this.age=age;
+            return this;
+        }
+
+        public Builder kcal(double kcal) {
+            this.kcal=kcal;
+            return this;
+        }
+
+        public Builder user(User user) {
+            this.user=user;
+            return this;
+        }
+
+        public Profile build() {
+            Profile profile = new Profile();
+            profile.profileid = this.id;
+            profile.name = this.name;
+            profile.surname = this.surname;
+            profile.weight = this.weight;
+            profile.height = this.height;
+            profile.age = this.age;
+            profile.kcal = this.kcal;
+            profile.user = this.user;
+            return profile;
+        }
+    }
+
 
     public Long getProfileid() {
         return profileid;

@@ -39,8 +39,9 @@ public class DailyMealController {
         if(id.isPresent()) {
             try {
                 Optional<Product> product = productDao.findById(id.get());
-                DailyMeal dailyMeal = new DailyMeal();
-                dailyMeal.setProduct(product.get());
+                DailyMeal dailyMeal = new DailyMeal.Builder()
+                        .product(product.get())
+                        .build();
                 model.addAttribute("dailyMeal", dailyMeal);
                 return "addMeal";
             } catch (NoSuchElementException e) {
@@ -56,8 +57,7 @@ public class DailyMealController {
         if(bindingResult.hasErrors()){
             return "redirect:/meal/add/"+dailyMeal.getProduct().getProductid()+"?fail";
         }
-        dailyMeal.setUser(userDao.findByLogin(principal.getName()));
-        dailyMealService.save(dailyMeal);
+        dailyMealService.save(dailyMeal, principal);
         return "redirect:/product/list?added";
     }
 
@@ -88,7 +88,6 @@ public class DailyMealController {
         if(bindingResult.hasErrors()){
             return "redirect:/meal/edit/"+dailyMeal.getDailyMealId()+"?fail";
         }
-        dailyMeal.setUser(userDao.findByLogin(principal.getName()));
         dailyMealService.update(dailyMeal);
         return "redirect:/home?edited";
     }

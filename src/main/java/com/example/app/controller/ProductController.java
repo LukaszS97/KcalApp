@@ -39,15 +39,13 @@ public class ProductController {
         if(bindingResult.hasErrors()) {
             return "product";
         }
-        product.setUser(userDao.findByLogin(principal.getName()));
-        productService.save(product);
+        productService.save(product, principal);
         return "redirect:/product/list";
     }
 
     @GetMapping("/product/list")
     public String productListPage(Model model, Principal principal) {
-        User user = userDao.findByLogin(principal.getName());
-        model.addAttribute("productList", productService.productsList(user));
+        model.addAttribute("productList", productService.productsList(userDao.findByLogin(principal.getName())));
         return "productList";
     }
 
@@ -77,8 +75,7 @@ public class ProductController {
         if(bindingResult.hasErrors()){
             return "redirect:/product/edit/"+product.getProductid()+"?fail";
         }
-        product.setUser(userDao.findByLogin(principal.getName()));
-        productService.update(product);
+        productService.update(product, principal);
         return "redirect:/product/list?edited";
     }
 }

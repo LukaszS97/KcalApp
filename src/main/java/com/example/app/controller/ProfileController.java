@@ -56,8 +56,7 @@ public class ProfileController {
         if(binding.hasErrors()){
             return "profile";
         }
-            profile.setUser(userDao.findByLogin(principal.getName()));
-            profileService.save(profile);
+            profileService.save(profile, principal);
             return "redirect:/profile?success";
     }
 }

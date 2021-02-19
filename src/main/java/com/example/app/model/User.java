@@ -22,51 +22,95 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<DailyMeal> dailyMeal;
 
-    public Set<DailyMeal> getDailyMeal() {
-        return dailyMeal;
+    public static final class Builder {
+        private String login;
+        private String password;
+        private Profile profile;
+        private Set<Product> product;
+        private Set<DailyMeal> dailyMeal;
+
+        public Builder login(String login) {
+            this.login=login;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password=password;
+            return this;
+        }
+
+        public Builder profile(Profile profile) {
+            this.profile=profile;
+            return this;
+        }
+
+        public Builder product(Set<Product> product) {
+            this.product=product;
+            return this;
+        }
+
+        public Builder dailyMeal(Set<DailyMeal> dailyMeal) {
+            this.dailyMeal=dailyMeal;
+            return this;
+        }
+
+        public User build() {
+            User user = new User();
+            user.login = this.login;
+            user.password = this.password;
+            user.profile = this.profile;
+            user.product = this.product;
+            user.dailyMeal = this.dailyMeal;
+            return user;
+        }
     }
 
-    public void setDailyMeal(Set<DailyMeal> dailyMeal) {
-        this.dailyMeal = dailyMeal;
+    public Set<DailyMeal> getDailyMeal() {
+        return dailyMeal;
     }
 
     public Set<Product> getProduct() {
         return product;
     }
 
-    public void setProduct(Set<Product> product) {
-        this.product = product;
-    }
-
     public Long getUserid() {
         return userid;
-    }
-
-    public void setUserid(Long userid) {
-        this.userid = userid;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Profile getProfile() {
         return profile;
     }
 
+
+    public void setUserid(Long userid) {
+        this.userid = userid;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public void setProduct(Set<Product> product) {
+        this.product = product;
+    }
+
+    public void setDailyMeal(Set<DailyMeal> dailyMeal) {
+        this.dailyMeal = dailyMeal;
     }
 }
